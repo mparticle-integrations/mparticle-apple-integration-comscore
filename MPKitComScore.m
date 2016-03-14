@@ -1,7 +1,7 @@
 //
 //  MPKitComScore.m
 //
-//  Copyright 2015 mParticle, Inc.
+//  Copyright 2016 mParticle, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -16,11 +16,10 @@
 //  limitations under the License.
 //
 
-#if defined(MP_KIT_COMSCORE)
-
 #import "MPKitComScore.h"
 #import "MPEvent.h"
-#import "MPEnums.h"
+#import "mParticle.h"
+#import "MPKitRegister.h"
 #import "CSComScore.h"
 
 typedef NS_ENUM(NSUInteger, MPcomScoreProduct) {
@@ -45,10 +44,19 @@ NSString *const escProduct = @"product";
 
 @implementation MPKitComScore
 
++ (NSNumber *)kitCode {
+    return @39;
+}
+
++ (void)load {
+    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"comScore" className:@"MPKitComScore" startImmediately:YES];
+    [MParticle registerExtension:kitRegister];
+}
+
 - (void)setupWithConfiguration:(NSDictionary *)configuration {
     [CSComScore setCustomerC2:configuration[ecsCustomerC2]];
     [CSComScore setPublisherSecret:configuration[ecsSecret]];
-    
+
     if ([[configuration[ecsAutoUpdateMode] lowercaseString] isEqualToString:@"foreonly"]) {
         [CSComScore enableAutoUpdate:[configuration[ecsAutoUpdateInterval] intValue] foregroundOnly:YES];
     } else if ([[configuration[ecsAutoUpdateMode] lowercaseString] isEqualToString:@"foreback"]) {
@@ -56,28 +64,28 @@ NSString *const escProduct = @"product";
     } else {
         [CSComScore disableAutoUpdate];
     }
-    
+
     if (configuration[ecsUseHTTPS]) {
         BOOL useHTTPS = [[configuration[ecsUseHTTPS] lowercaseString] isEqualToString:@"true"];
         [CSComScore setSecure:useHTTPS];
     }
-    
+
     if (configuration[escAppName]) {
         [CSComScore setAppName:configuration[escAppName]];
     }
-    
+
     if (configuration[escProduct]) {
         self.product = [configuration[escProduct] isEqualToString:@"enterprise"] ? MPcomScoreProductEnterprise : MPcomScoreProductDirect;
     }
 }
 
 - (void)setConfiguration:(NSDictionary *)configuration {
-    if (!started || ![self isValidConfiguration:configuration]) {
+    if (!_started || ![self isValidConfiguration:configuration]) {
         return;
     }
-    
-    [super setConfiguration:configuration];
-    
+
+    _configuration = configuration;
+
     [self setupWithConfiguration:configuration];
 }
 
@@ -85,10 +93,10 @@ NSString *const escProduct = @"product";
 - (BOOL)isValidConfiguration:(NSDictionary *)configuration {
     NSString *customerC2 = configuration[ecsCustomerC2];
     NSString *secret = configuration[ecsSecret];
-    
+
     BOOL validConfiguration = customerC2 != nil && (customerC2.length > 0) &&
                               secret != nil && (secret.length > 0);
-    
+
     return validConfiguration;
 }
 
@@ -98,46 +106,45 @@ NSString *const escProduct = @"product";
     NSString *key;
     id value;
     Class NSStringClass = [NSString class];
-    
+
     while ((key = [originalEnumerator nextObject])) {
         value = originalDictionary[key];
-        
+
         if ([value isKindOfClass:NSStringClass]) {
             convertedDictionary[key] = value;
         } else {
             convertedDictionary[key] = [NSString stringWithFormat:@"%@", value];
         }
     }
-    
+
     return convertedDictionary;
 }
 
 #pragma mark MPKitInstanceProtocol methods
-- (instancetype)initWithConfiguration:(NSDictionary *)configuration {
-    self = [super initWithConfiguration:configuration];
+- (instancetype)initWithConfiguration:(NSDictionary *)configuration startImmediately:(BOOL)startImmediately {
+    NSAssert(configuration != nil, @"Required parameter. It cannot be nil.");
+    self = [super init];
     if (!self || ![self isValidConfiguration:configuration]) {
         return nil;
     }
-    
+
     self.product = MPcomScoreProductDirect;
-    
+
     [CSComScore setAppContext];
-    
+
     [self setupWithConfiguration:configuration];
 
-    frameworkAvailable = YES;
-    started = YES;
-    self.forwardedEvents = YES;
-    self.active = YES;
+    _configuration = configuration;
+    _started = startImmediately;
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary *userInfo = @{mParticleKitInstanceKey:@(MPKitInstanceComScore),
-                                   mParticleEmbeddedSDKInstanceKey:@(MPKitInstanceComScore)};
-        
+        NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode],
+                                   mParticleEmbeddedSDKInstanceKey:[[self class] kitCode]};
+
         [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification
                                                             object:nil
                                                           userInfo:userInfo];
-        
+
         [[NSNotificationCenter defaultCenter] postNotificationName:mParticleEmbeddedSDKDidBecomeActiveNotification
                                                             object:nil
                                                           userInfo:userInfo];
@@ -148,14 +155,14 @@ NSString *const escProduct = @"product";
 
 - (MPKitExecStatus *)beginSession {
     [CSComScore onUxActive];
-    
+
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
 - (MPKitExecStatus *)endSession {
     [CSComScore onUxInactive];
-    
+
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
@@ -167,7 +174,7 @@ NSString *const escProduct = @"product";
         execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeIncorrectProductVersion];
         return execStatus;
     }
-    
+
     if (event.type == MPEventTypeNavigation) {
         return [self logScreen:event];
     } else {
@@ -175,9 +182,9 @@ NSString *const escProduct = @"product";
         if (event.info) {
             [labelsDictionary addEntriesFromDictionary:[self convertAllValuesToString:event.info]];
         }
-    
+
         [CSComScore hiddenWithLabels:labelsDictionary];
-        
+
         execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
         return execStatus;
     }
@@ -190,28 +197,28 @@ NSString *const escProduct = @"product";
         execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeIncorrectProductVersion];
         return execStatus;
     }
-    
+
     NSMutableDictionary *labelsDictionary = [@{@"name":event.name} mutableCopy];
     if (event.info) {
         [labelsDictionary addEntriesFromDictionary:[self convertAllValuesToString:event.info]];
     }
-    
+
     [CSComScore viewWithLabels:labelsDictionary];
-    
+
     execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
 - (MPKitExecStatus *)setDebugMode:(BOOL)debugMode {
     [CSComScore setDebug:debugMode];
-    
+
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
 - (MPKitExecStatus *)setOptOut:(BOOL)optOut {
     [CSComScore setEnabled:!optOut];
-    
+
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
@@ -223,11 +230,11 @@ NSString *const escProduct = @"product";
         execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeIncorrectProductVersion];
         return execStatus;
     }
-    
+
     if (value != nil) {
         [CSComScore setLabel:key value:value];
     }
-    
+
     execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
@@ -239,13 +246,11 @@ NSString *const escProduct = @"product";
         execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeIncorrectProductVersion];
         return execStatus;
     }
-    
+
     [CSComScore setLabel:tag value:@""];
-    
+
     execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
 @end
-
-#endif

@@ -1,7 +1,7 @@
 //
 //  MPKitComScore.h
 //
-//  Copyright 2015 mParticle, Inc.
+//  Copyright 2016 mParticle, Inc.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -16,12 +16,13 @@
 //  limitations under the License.
 //
 
-#if defined(MP_KIT_COMSCORE)
+#import <Foundation/Foundation.h>
+#import "MPKitExecStatus.h"
+#import "MPKitProtocol.h"
 
-#import "MPKitAbstract.h"
+@interface MPKitComScore : NSObject <MPKitProtocol>
 
-@interface MPKitComScore : MPKitAbstract <MPKitInstanceProtocol>
+@property (nonatomic, strong, nonnull) NSDictionary *configuration;
+@property (nonatomic, unsafe_unretained, readonly) BOOL started;
 
 @end
-
-#endif
