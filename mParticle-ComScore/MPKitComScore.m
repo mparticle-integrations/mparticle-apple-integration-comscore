@@ -122,7 +122,6 @@ NSString *const escProduct = @"product";
 
 #pragma mark MPKitInstanceProtocol methods
 - (instancetype)initWithConfiguration:(NSDictionary *)configuration startImmediately:(BOOL)startImmediately {
-    NSAssert(configuration != nil, @"Required parameter. It cannot be nil.");
     self = [super init];
     if (!self || ![self isValidConfiguration:configuration]) {
         return nil;
@@ -138,14 +137,9 @@ NSString *const escProduct = @"product";
     _started = startImmediately;
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode],
-                                   mParticleEmbeddedSDKInstanceKey:[[self class] kitCode]};
+        NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
 
         [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification
-                                                            object:nil
-                                                          userInfo:userInfo];
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:mParticleEmbeddedSDKDidBecomeActiveNotification
                                                             object:nil
                                                           userInfo:userInfo];
     });
