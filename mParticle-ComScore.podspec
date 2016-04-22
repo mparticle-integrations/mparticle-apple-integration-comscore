@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
     s.ios.source_files      = 'mParticle-ComScore/*.{h,m,mm}'
     s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 6.0'
     s.ios.dependency 'ComScore-iOS', '3.1510.23'
+    s.frameworks = 'SystemConfiguration'
 
     s.ios.pod_target_xcconfig = {
         'LIBRARY_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/ComScore-iOS/**',
