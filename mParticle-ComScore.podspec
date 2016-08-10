@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "mParticle-ComScore"
-    s.version          = "6.4.0"
+    s.version          = "6.5.0"
     s.summary          = "ComScore integration for mParticle"
 
     s.description      = <<-DESC
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 
     s.ios.deployment_target = "7.0"
     s.ios.source_files      = 'mParticle-ComScore/*.{h,m,mm}'
-    s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 6.4'
+    s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 6.5'
     s.ios.dependency 'ComScore-iOS', '3.1510.23'
     s.frameworks = 'SystemConfiguration'
 
