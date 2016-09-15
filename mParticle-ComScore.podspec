@@ -21,6 +21,7 @@ Pod::Spec.new do |s|
 
     s.ios.pod_target_xcconfig = {
         'LIBRARY_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/ComScore-iOS/**',
+        'USER_HEADER_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/ComScore-iOS/comScore/headers',
         'OTHER_LDFLAGS' => '$(inherited) -l"comScore"'
     }
 end
