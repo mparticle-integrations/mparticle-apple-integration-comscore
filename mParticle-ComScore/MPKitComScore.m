@@ -20,7 +20,11 @@
 #import "MPEvent.h"
 #import "mParticle.h"
 #import "MPKitRegister.h"
-#import "CSComScore.h"
+#if defined(__has_include) && __has_include(<ComScore/ComScore.h>)
+#import <ComScore/ComScore.h>
+#else
+#import "ComScore.h"
+#endif
 
 typedef NS_ENUM(NSUInteger, MPcomScoreProduct) {
     MPcomScoreProductDirect = 1,
@@ -29,11 +33,11 @@ typedef NS_ENUM(NSUInteger, MPcomScoreProduct) {
 
 NSString *const ecsCustomerC2 = @"CustomerC2Value";
 NSString *const ecsSecret = @"PublisherSecret";
-NSString *const ecsUseHTTPS = @"UseHttps";
 NSString *const ecsAutoUpdateMode = @"autoUpdateMode";
 NSString *const ecsAutoUpdateInterval = @"autoUpdateInterval";
 NSString *const escAppName = @"appName";
 NSString *const escProduct = @"product";
+NSString *const ecsPartnerId = @"partnerId";
 
 @interface MPKitComScore()
 
@@ -54,39 +58,36 @@ NSString *const escProduct = @"product";
 }
 
 - (void)setupWithConfiguration:(NSDictionary *)configuration {
-    [CSComScore setCustomerC2:configuration[ecsCustomerC2]];
-    [CSComScore setPublisherSecret:configuration[ecsSecret]];
+    
+    SCORPublisherConfiguration *publisherConfig = [SCORPublisherConfiguration publisherConfigurationWithBuilderBlock:^(SCORPublisherConfigurationBuilder *builder) {
+        
+        builder.publisherId = configuration[ecsCustomerC2];
+        builder.publisherSecret = configuration[ecsSecret];
 
-    if ([[configuration[ecsAutoUpdateMode] lowercaseString] isEqualToString:@"foreonly"]) {
-        [CSComScore enableAutoUpdate:[configuration[ecsAutoUpdateInterval] intValue] foregroundOnly:YES];
-    } else if ([[configuration[ecsAutoUpdateMode] lowercaseString] isEqualToString:@"foreback"]) {
-        [CSComScore enableAutoUpdate:[configuration[ecsAutoUpdateInterval] intValue] foregroundOnly:NO];
-    } else {
-        [CSComScore disableAutoUpdate];
-    }
+        builder.usagePropertiesAutoUpdateMode = SCORUsagePropertiesAutoUpdateModeForegroundOnly;
+        builder.usagePropertiesAutoUpdateInterval = [configuration[ecsAutoUpdateInterval] intValue];
 
-    if (configuration[ecsUseHTTPS]) {
-        BOOL useHTTPS = [[configuration[ecsUseHTTPS] lowercaseString] isEqualToString:@"true"];
-        [CSComScore setSecure:useHTTPS];
-    }
+        builder.secureTransmission = YES;
 
-    if (configuration[escAppName]) {
-        [CSComScore setAppName:configuration[escAppName]];
-    }
-
+        if ([[configuration[ecsAutoUpdateMode] lowercaseString] isEqualToString:@"foreback"]) {
+            builder.usagePropertiesAutoUpdateMode = SCORUsagePropertiesAutoUpdateModeForegroundAndBackground;
+        }
+        
+        if (configuration[escAppName]) {
+            builder.applicationName = configuration[escAppName];
+        }
+    }];
+    [[SCORAnalytics configuration] addClientWithConfiguration:publisherConfig];
+    
+    SCORPartnerConfiguration *partnerConfig = [SCORPartnerConfiguration partnerConfigurationWithBuilderBlock:^(SCORPartnerConfigurationBuilder *builder) {
+        builder.partnerId = configuration[ecsPartnerId];
+    }];
+    [[SCORAnalytics configuration] addClientWithConfiguration:partnerConfig];
+    [SCORAnalytics start];
+    
     if (configuration[escProduct]) {
         self.product = [configuration[escProduct] isEqualToString:@"enterprise"] ? MPcomScoreProductEnterprise : MPcomScoreProductDirect;
     }
-}
-
-- (void)setConfiguration:(NSDictionary *)configuration {
-    if (!_started || ![self isValidConfiguration:configuration]) {
-        return;
-    }
-
-    _configuration = configuration;
-
-    [self setupWithConfiguration:configuration];
 }
 
 #pragma mark Private methods
@@ -129,8 +130,6 @@ NSString *const escProduct = @"product";
 
     self.product = MPcomScoreProductDirect;
 
-    [CSComScore setAppContext];
-
     [self setupWithConfiguration:configuration];
 
     _configuration = configuration;
@@ -148,14 +147,14 @@ NSString *const escProduct = @"product";
 }
 
 - (MPKitExecStatus *)beginSession {
-    [CSComScore onUxActive];
+    [SCORAnalytics notifyUxActive];
 
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
 - (MPKitExecStatus *)endSession {
-    [CSComScore onUxInactive];
+    [SCORAnalytics notifyUxInactive];
 
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
@@ -177,7 +176,7 @@ NSString *const escProduct = @"product";
             [labelsDictionary addEntriesFromDictionary:[self convertAllValuesToString:event.info]];
         }
 
-        [CSComScore hiddenWithLabels:labelsDictionary];
+        [SCORAnalytics notifyHiddenEventWithLabels:labelsDictionary];
 
         execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
         return execStatus;
@@ -197,21 +196,23 @@ NSString *const escProduct = @"product";
         [labelsDictionary addEntriesFromDictionary:[self convertAllValuesToString:event.info]];
     }
 
-    [CSComScore viewWithLabels:labelsDictionary];
+    [SCORAnalytics notifyViewEventWithLabels:labelsDictionary];
 
     execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
 - (MPKitExecStatus *)setDebugMode:(BOOL)debugMode {
-    [CSComScore setDebug:debugMode];
+    [SCORAnalytics setLogLevel:SCORLogLevelDebug];
 
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
 - (MPKitExecStatus *)setOptOut:(BOOL)optOut {
-    [CSComScore setEnabled:!optOut];
+    if (optOut) {
+        [[SCORAnalytics configuration] disable];
+    }
 
     MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
@@ -226,7 +227,7 @@ NSString *const escProduct = @"product";
     }
 
     if (value != nil) {
-        [CSComScore setLabel:key value:value];
+        [[SCORAnalytics configuration] setPersistentLabelWithName:key value:value];
     }
 
     execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
@@ -241,7 +242,7 @@ NSString *const escProduct = @"product";
         return execStatus;
     }
 
-    [CSComScore setLabel:tag value:@""];
+    [[SCORAnalytics configuration] setPersistentLabelWithName:tag value:@""];
 
     execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
     return execStatus;
