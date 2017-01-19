@@ -19,4 +19,9 @@ Pod::Spec.new do |s|
     s.ios.dependency 'ComScore', '5.1.10'
     s.frameworks = 'SystemConfiguration'
 
+    s.ios.pod_target_xcconfig = {
+        'FRAMEWORK_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/ComScore/ComScore/iOS/**',
+        'OTHER_LDFLAGS' => '$(inherited) -framework "ComScore"'
+    }
+
 end
