@@ -146,20 +146,6 @@ NSString *const ecsPartnerId = @"partnerId";
     return self;
 }
 
-- (MPKitExecStatus *)beginSession {
-    [SCORAnalytics notifyUxActive];
-
-    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
-    return execStatus;
-}
-
-- (MPKitExecStatus *)endSession {
-    [SCORAnalytics notifyUxInactive];
-
-    MPKitExecStatus *execStatus = [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeSuccess];
-    return execStatus;
-}
-
 - (MPKitExecStatus *)logEvent:(MPEvent *)event {
     MPKitExecStatus *execStatus;
 
