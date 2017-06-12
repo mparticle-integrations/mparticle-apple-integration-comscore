@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = "8.0"
     s.ios.source_files      = 'mParticle-ComScore/*.{h,m,mm}'
     s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 6.14.0'
-    s.ios.dependency 'ComScore', '5.3.0'
+    s.ios.dependency 'ComScore', '5.4.1'
     s.frameworks = 'SystemConfiguration'
 
     s.ios.pod_target_xcconfig = {
