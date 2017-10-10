@@ -53,7 +53,7 @@ NSString *const ecsPartnerId = @"partnerId";
 }
 
 + (void)load {
-    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"comScore" className:@"MPKitComScore" startImmediately:YES];
+    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"comScore" className:@"MPKitComScore"];
     [MParticle registerExtension:kitRegister];
 }
 
@@ -122,10 +122,12 @@ NSString *const ecsPartnerId = @"partnerId";
 }
 
 #pragma mark MPKitInstanceProtocol methods
-- (instancetype)initWithConfiguration:(NSDictionary *)configuration startImmediately:(BOOL)startImmediately {
-    self = [super init];
-    if (!self || ![self isValidConfiguration:configuration]) {
-        return nil;
+- (MPKitExecStatus *)didFinishLaunchingWithConfiguration:(NSDictionary *)configuration {
+    MPKitExecStatus *execStatus = nil;
+
+    if (![self isValidConfiguration:configuration]) {
+        execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeRequirementsNotMet];
+        return execStatus;
     }
 
     self.product = MPcomScoreProductDirect;
@@ -133,7 +135,7 @@ NSString *const ecsPartnerId = @"partnerId";
     [self setupWithConfiguration:configuration];
 
     _configuration = configuration;
-    _started = startImmediately;
+    _started = YES;
 
     dispatch_async(dispatch_get_main_queue(), ^{
         NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
@@ -143,7 +145,8 @@ NSString *const ecsPartnerId = @"partnerId";
                                                           userInfo:userInfo];
     });
 
-    return self;
+    execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
 }
 
 - (MPKitExecStatus *)logEvent:(MPEvent *)event {
