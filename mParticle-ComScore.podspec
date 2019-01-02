@@ -14,14 +14,13 @@ Pod::Spec.new do |s|
     s.social_media_url = "https://twitter.com/mparticles"
 
     s.ios.deployment_target = "8.0"
-    s.ios.source_files      = 'mParticle-ComScore/*.{h,m,mm}'
-    s.ios.dependency 'mParticle-Apple-SDK/mParticle', '~> 7.8.0'
-    s.ios.dependency 'ComScore', '~> 5.0'
-    s.frameworks = 'SystemConfiguration'
+    s.tvos.deployment_target = "9.0"
 
-    s.ios.pod_target_xcconfig = {
-        'FRAMEWORK_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/ComScore/ComScore/iOS/**',
-        'OTHER_LDFLAGS' => '$(inherited) -framework "ComScore"'
-    }
+    s.source_files      = 'mParticle-ComScore/*.{h,m,mm}'
+
+    s.dependency 'mParticle-Apple-SDK/mParticle', '~> 7.8.0'
+    s.dependency 'ComScore', '~> 5.0'
+
+    s.frameworks = 'SystemConfiguration'
 
 end
