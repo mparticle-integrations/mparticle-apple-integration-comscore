@@ -44,27 +44,28 @@ NSString *const ecsPartnerId = @"partnerId";
     SCORPublisherConfiguration *publisherConfig = [SCORPublisherConfiguration publisherConfigurationWithBuilderBlock:^(SCORPublisherConfigurationBuilder *builder) {
         
         builder.publisherId = configuration[ecsCustomerC2];
-        builder.publisherSecret = configuration[ecsSecret];
-        
-        builder.usagePropertiesAutoUpdateMode = SCORUsagePropertiesAutoUpdateModeForegroundOnly;
-        builder.usagePropertiesAutoUpdateInterval = [configuration[ecsAutoUpdateInterval] intValue];
-        
-        builder.secureTransmission = YES;
-        
-        if ([[configuration[ecsAutoUpdateMode] lowercaseString] isEqualToString:@"foreback"]) {
-            builder.usagePropertiesAutoUpdateMode = SCORUsagePropertiesAutoUpdateModeForegroundAndBackground;
-        }
-        
-        if (configuration[escAppName]) {
-            builder.applicationName = configuration[escAppName];
-        }
+        builder.secureTransmissionEnabled = YES;
+
     }];
     [[SCORAnalytics configuration] addClientWithConfiguration:publisherConfig];
     
     SCORPartnerConfiguration *partnerConfig = [SCORPartnerConfiguration partnerConfigurationWithBuilderBlock:^(SCORPartnerConfigurationBuilder *builder) {
+        
         builder.partnerId = configuration[ecsPartnerId];
     }];
     [[SCORAnalytics configuration] addClientWithConfiguration:partnerConfig];
+    
+    [SCORAnalytics configuration].usagePropertiesAutoUpdateMode = SCORUsagePropertiesAutoUpdateModeForegroundOnly;
+    [SCORAnalytics configuration].usagePropertiesAutoUpdateInterval = [configuration[ecsAutoUpdateInterval] intValue];
+
+    if ([[configuration[ecsAutoUpdateMode] lowercaseString] isEqualToString:@"foreback"]) {
+        [SCORAnalytics configuration].usagePropertiesAutoUpdateMode = SCORUsagePropertiesAutoUpdateModeForegroundAndBackground;
+    }
+
+    if (configuration[escAppName]) {
+        [SCORAnalytics configuration].applicationName = configuration[escAppName];
+    }
+    
     [SCORAnalytics start];
     
     if (configuration[escProduct]) {
@@ -131,7 +132,15 @@ NSString *const ecsPartnerId = @"partnerId";
     return execStatus;
 }
 
-- (MPKitExecStatus *)logEvent:(MPEvent *)event {
+- (MPKitExecStatus *)logBaseEvent:(MPBaseEvent *)event {
+    if ([event isKindOfClass:[MPEvent class]]) {
+        return [self routeEvent:(MPEvent *)event];
+    } else {
+        return [[MPKitExecStatus alloc] initWithSDKCode:@(MPKitInstanceComScore) returnCode:MPKitReturnCodeUnavailable];
+    }
+}
+
+- (MPKitExecStatus *)routeEvent:(MPEvent *)event {
     MPKitExecStatus *execStatus;
     
     if (self.product != MPcomScoreProductEnterprise) {
@@ -143,8 +152,8 @@ NSString *const ecsPartnerId = @"partnerId";
         return [self logScreen:event];
     } else {
         NSMutableDictionary *labelsDictionary = [@{@"name":event.name} mutableCopy];
-        if (event.info) {
-            [labelsDictionary addEntriesFromDictionary:[self convertAllValuesToString:event.info]];
+        if (event.customAttributes) {
+            [labelsDictionary addEntriesFromDictionary:[self convertAllValuesToString:event.customAttributes]];
         }
         
         [SCORAnalytics notifyHiddenEventWithLabels:labelsDictionary];
@@ -163,8 +172,8 @@ NSString *const ecsPartnerId = @"partnerId";
     }
     
     NSMutableDictionary *labelsDictionary = [@{@"name":event.name} mutableCopy];
-    if (event.info) {
-        [labelsDictionary addEntriesFromDictionary:[self convertAllValuesToString:event.info]];
+    if (event.customAttributes) {
+        [labelsDictionary addEntriesFromDictionary:[self convertAllValuesToString:event.customAttributes]];
     }
     
     [SCORAnalytics notifyViewEventWithLabels:labelsDictionary];
