@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "ComScore",
+        "repositoryURL": "https://github.com/comScore/Comscore-Swift-Package-Manager",
+        "state": {
+          "branch": null,
+          "revision": "de8577f58200195a882d3b21f1270775b02b78e2",
+          "version": "6.9.0"
+        }
+      },
+      {
+        "package": "mParticle-Apple-SDK",
+        "repositoryURL": "https://github.com/mParticle/mparticle-apple-sdk",
+        "state": {
+          "branch": null,
+          "revision": "4ac987441b7f5d7b2cb18ccd740354f11c90b645",
+          "version": "8.5.4"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
