@@ -30,7 +30,8 @@ let package = Package(
                 .byName(name: "mParticle-Apple-SDK"),
                 .byName(name: "ComScore"),
             ],
-            path: "mParticle-ComScore"
+            path: "mParticle-ComScore",
+            publicHeadersPath: "."
         )
     ]
 )
