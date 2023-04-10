@@ -7,7 +7,7 @@ This repository contains the [ComScore](https://www.comscore.com) integration fo
 1. Add the kit dependency to your app's Podfile:
 
     ```
-    pod 'mParticle-ComScore', '~> 7.0'
+    pod 'mParticle-ComScore', '~> 8'
     ```
 
 2. Follow the mParticle iOS SDK [quick-start](https://github.com/mParticle/mparticle-apple-sdk), then rebuild and launch your app, and verify that you see `"Included kits: { ComScore }"` in your Xcode console 
