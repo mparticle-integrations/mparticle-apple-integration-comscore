@@ -1,0 +1,512 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5308E1312BC9B70D008E646B /* mParticle_ComScore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5308E1282BC9B70D008E646B /* mParticle_ComScore.framework */; };
+		5308E1362BC9B70D008E646B /* mParticle_ComScoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5308E1352BC9B70D008E646B /* mParticle_ComScoreTests.m */; };
+		5308E1372BC9B70D008E646B /* mParticle_ComScore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5308E12B2BC9B70D008E646B /* mParticle_ComScore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5308E1422BC9B756008E646B /* MPKitComScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5308E1402BC9B756008E646B /* MPKitComScore.m */; };
+		5308E1432BC9B756008E646B /* MPKitComScore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5308E1412BC9B756008E646B /* MPKitComScore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5308E1452BC9B774008E646B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 5308E1442BC9B774008E646B /* PrivacyInfo.xcprivacy */; };
+		5308E1482BC9B7BB008E646B /* mParticle-Apple-SDK in Frameworks */ = {isa = PBXBuildFile; productRef = 5308E1472BC9B7BB008E646B /* mParticle-Apple-SDK */; };
+		5308E14B2BC9B862008E646B /* ComScore in Frameworks */ = {isa = PBXBuildFile; productRef = 5308E14A2BC9B862008E646B /* ComScore */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5308E1322BC9B70D008E646B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5308E11F2BC9B70D008E646B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5308E1272BC9B70D008E646B;
+			remoteInfo = "mParticle-ComScore";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5308E1282BC9B70D008E646B /* mParticle_ComScore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mParticle_ComScore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5308E12B2BC9B70D008E646B /* mParticle_ComScore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mParticle_ComScore.h; sourceTree = "<group>"; };
+		5308E1302BC9B70D008E646B /* mParticle-ComScoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mParticle-ComScoreTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5308E1352BC9B70D008E646B /* mParticle_ComScoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mParticle_ComScoreTests.m; sourceTree = "<group>"; };
+		5308E1402BC9B756008E646B /* MPKitComScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPKitComScore.m; sourceTree = "<group>"; };
+		5308E1412BC9B756008E646B /* MPKitComScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPKitComScore.h; sourceTree = "<group>"; };
+		5308E1442BC9B774008E646B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5308E1252BC9B70D008E646B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5308E1482BC9B7BB008E646B /* mParticle-Apple-SDK in Frameworks */,
+				5308E14B2BC9B862008E646B /* ComScore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5308E12D2BC9B70D008E646B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5308E1312BC9B70D008E646B /* mParticle_ComScore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5308E11E2BC9B70D008E646B = {
+			isa = PBXGroup;
+			children = (
+				5308E12A2BC9B70D008E646B /* mParticle-ComScore */,
+				5308E1342BC9B70D008E646B /* mParticle-ComScoreTests */,
+				5308E1292BC9B70D008E646B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5308E1292BC9B70D008E646B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5308E1282BC9B70D008E646B /* mParticle_ComScore.framework */,
+				5308E1302BC9B70D008E646B /* mParticle-ComScoreTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5308E12A2BC9B70D008E646B /* mParticle-ComScore */ = {
+			isa = PBXGroup;
+			children = (
+				5308E12B2BC9B70D008E646B /* mParticle_ComScore.h */,
+				5308E1412BC9B756008E646B /* MPKitComScore.h */,
+				5308E1402BC9B756008E646B /* MPKitComScore.m */,
+				5308E1442BC9B774008E646B /* PrivacyInfo.xcprivacy */,
+			);
+			path = "mParticle-ComScore";
+			sourceTree = "<group>";
+		};
+		5308E1342BC9B70D008E646B /* mParticle-ComScoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				5308E1352BC9B70D008E646B /* mParticle_ComScoreTests.m */,
+			);
+			path = "mParticle-ComScoreTests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		5308E1232BC9B70D008E646B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5308E1372BC9B70D008E646B /* mParticle_ComScore.h in Headers */,
+				5308E1432BC9B756008E646B /* MPKitComScore.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		5308E1272BC9B70D008E646B /* mParticle-ComScore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5308E13A2BC9B70D008E646B /* Build configuration list for PBXNativeTarget "mParticle-ComScore" */;
+			buildPhases = (
+				5308E1232BC9B70D008E646B /* Headers */,
+				5308E1242BC9B70D008E646B /* Sources */,
+				5308E1252BC9B70D008E646B /* Frameworks */,
+				5308E1262BC9B70D008E646B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "mParticle-ComScore";
+			packageProductDependencies = (
+				5308E1472BC9B7BB008E646B /* mParticle-Apple-SDK */,
+				5308E14A2BC9B862008E646B /* ComScore */,
+			);
+			productName = "mParticle-ComScore";
+			productReference = 5308E1282BC9B70D008E646B /* mParticle_ComScore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5308E12F2BC9B70D008E646B /* mParticle-ComScoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5308E13D2BC9B70D008E646B /* Build configuration list for PBXNativeTarget "mParticle-ComScoreTests" */;
+			buildPhases = (
+				5308E12C2BC9B70D008E646B /* Sources */,
+				5308E12D2BC9B70D008E646B /* Frameworks */,
+				5308E12E2BC9B70D008E646B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5308E1332BC9B70D008E646B /* PBXTargetDependency */,
+			);
+			name = "mParticle-ComScoreTests";
+			productName = "mParticle-ComScoreTests";
+			productReference = 5308E1302BC9B70D008E646B /* mParticle-ComScoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5308E11F2BC9B70D008E646B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					5308E1272BC9B70D008E646B = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					5308E12F2BC9B70D008E646B = {
+						CreatedOnToolsVersion = 15.3;
+					};
+				};
+			};
+			buildConfigurationList = 5308E1222BC9B70D008E646B /* Build configuration list for PBXProject "mParticle-ComScore" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5308E11E2BC9B70D008E646B;
+			packageReferences = (
+				5308E1462BC9B7BB008E646B /* XCRemoteSwiftPackageReference "mparticle-apple-sdk" */,
+				5308E1492BC9B862008E646B /* XCRemoteSwiftPackageReference "Comscore-Swift-Package-Manager" */,
+			);
+			productRefGroup = 5308E1292BC9B70D008E646B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5308E1272BC9B70D008E646B /* mParticle-ComScore */,
+				5308E12F2BC9B70D008E646B /* mParticle-ComScoreTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5308E1262BC9B70D008E646B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5308E1452BC9B774008E646B /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5308E12E2BC9B70D008E646B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5308E1242BC9B70D008E646B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5308E1422BC9B756008E646B /* MPKitComScore.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5308E12C2BC9B70D008E646B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5308E1362BC9B70D008E646B /* mParticle_ComScoreTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5308E1332BC9B70D008E646B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5308E1272BC9B70D008E646B /* mParticle-ComScore */;
+			targetProxy = 5308E1322BC9B70D008E646B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		5308E1382BC9B70D008E646B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5308E1392BC9B70D008E646B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5308E13B2BC9B70D008E646B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-ComScore";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5308E13C2BC9B70D008E646B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-ComScore";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5308E13E2BC9B70D008E646B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-ComScoreTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5308E13F2BC9B70D008E646B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-ComScoreTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5308E1222BC9B70D008E646B /* Build configuration list for PBXProject "mParticle-ComScore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5308E1382BC9B70D008E646B /* Debug */,
+				5308E1392BC9B70D008E646B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5308E13A2BC9B70D008E646B /* Build configuration list for PBXNativeTarget "mParticle-ComScore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5308E13B2BC9B70D008E646B /* Debug */,
+				5308E13C2BC9B70D008E646B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5308E13D2BC9B70D008E646B /* Build configuration list for PBXNativeTarget "mParticle-ComScoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5308E13E2BC9B70D008E646B /* Debug */,
+				5308E13F2BC9B70D008E646B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5308E1462BC9B7BB008E646B /* XCRemoteSwiftPackageReference "mparticle-apple-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mParticle/mparticle-apple-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.19.0;
+			};
+		};
+		5308E1492BC9B862008E646B /* XCRemoteSwiftPackageReference "Comscore-Swift-Package-Manager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/comScore/Comscore-Swift-Package-Manager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.12.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5308E1472BC9B7BB008E646B /* mParticle-Apple-SDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5308E1462BC9B7BB008E646B /* XCRemoteSwiftPackageReference "mparticle-apple-sdk" */;
+			productName = "mParticle-Apple-SDK";
+		};
+		5308E14A2BC9B862008E646B /* ComScore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5308E1492BC9B862008E646B /* XCRemoteSwiftPackageReference "Comscore-Swift-Package-Manager" */;
+			productName = ComScore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 5308E11F2BC9B70D008E646B /* Project object */;
+}

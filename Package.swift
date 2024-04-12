@@ -20,7 +20,7 @@ let package = Package(
       .package(
           name: "ComScore",
           url: "https://github.com/comScore/Comscore-Swift-Package-Manager",
-          .upToNextMajor(from: "6.6.0")
+          .upToNextMajor(from: "6.12.3")
       )
     ],
     targets: [
