@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
     s.source           = { :git => "https://github.com/mparticle-integrations/mparticle-apple-integration-comscore.git", :tag => "v" +s.version.to_s }
     s.social_media_url = "https://twitter.com/mparticle"
 
-    s.ios.deployment_target = "9.0"
-    s.tvos.deployment_target = "9.0"
+    s.ios.deployment_target = "11.0"
+    s.tvos.deployment_target = "11.0"
 
     s.source_files     = 'mParticle-ComScore/*.{h,m,mm}'
 

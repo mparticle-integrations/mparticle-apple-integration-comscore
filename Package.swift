@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "mParticle-ComScore",
-    platforms: [ .iOS(.v9) ],
+    platforms: [ .iOS(.v11), .tvOS(.v11) ],
     products: [
         .library(
             name: "mParticle-ComScore",
