@@ -16,10 +16,10 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = "9.0"
     s.tvos.deployment_target = "9.0"
 
-    s.source_files      = 'mParticle-ComScore/*.{h,m,mm}'
+    s.source_files     = 'mParticle-ComScore/*.{h,m,mm}'
 
     s.dependency 'mParticle-Apple-SDK/mParticle', '~> 8.0'
-    s.dependency 'ComScore', '~> 6.0'
+    s.dependency 'ComScore', '~> 6.12'
 
     s.frameworks = 'SystemConfiguration'
 
