@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "mParticle-ComScore"
-    s.version          = "8.0.4"
+    s.version          = "8.1.0"
     s.summary          = "ComScore integration for mParticle"
 
     s.description      = <<-DESC
